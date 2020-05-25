@@ -39,9 +39,8 @@ public class BookDaoImpl implements BookDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Long bookId = (Long) session.save(book);
+            session.save(book);
             transaction.commit();
-            book.setId(bookId);
             LOGGER.info("book " + book + " was added to DB");
             return book;
         } catch (Exception e) {

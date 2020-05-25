@@ -36,9 +36,8 @@ public class AuthorDaoImpl implements AuthorDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Long authorId = (Long) session.save(author);
+            session.save(author);
             transaction.commit();
-            author.setId(authorId);
             LOGGER.info("author " + author + " was added to DB");
             return author;
         } catch (Exception e) {

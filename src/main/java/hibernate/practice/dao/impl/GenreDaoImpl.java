@@ -36,9 +36,8 @@ public class GenreDaoImpl implements GenreDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Long genreId = (Long) session.save(genre);
+            session.save(genre);
             transaction.commit();
-            genre.setId(genreId);
             LOGGER.info("genre " + genre + " was added to DB");
             return genre;
         } catch (Exception e) {
