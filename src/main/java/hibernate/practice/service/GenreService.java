@@ -7,5 +7,5 @@ import java.util.List;
 public interface GenreService {
     List<Book> getAllBooksByGenre(Genre genre);
 
-    Genre add(Genre genre);
+    void add(Genre genre);
 }

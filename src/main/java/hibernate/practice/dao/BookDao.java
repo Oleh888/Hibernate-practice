@@ -6,5 +6,5 @@ import java.util.List;
 public interface BookDao {
     List<Book> getBookByTitle(String title);
 
-    Book add(Book book);
+    void add(Book book);
 }

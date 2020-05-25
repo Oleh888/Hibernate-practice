@@ -32,19 +32,24 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public Author add(Author author) {
+    public void add(Author author) {
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(author);
             transaction.commit();
             LOGGER.info("author " + author + " was added to DB");
-            return author;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't insert author entity", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }

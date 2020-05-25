@@ -35,19 +35,24 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public Book add(Book book) {
+    public void add(Book book) {
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(book);
             transaction.commit();
             LOGGER.info("book " + book + " was added to DB");
-            return book;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't insert book entity", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }

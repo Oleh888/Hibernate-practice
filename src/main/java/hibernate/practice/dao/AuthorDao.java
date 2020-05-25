@@ -7,5 +7,5 @@ import java.util.List;
 public interface AuthorDao {
     List<Book> getListOfBooksByAuthor(Author author);
 
-    Author add(Author author);
+    void add(Author author);
 }

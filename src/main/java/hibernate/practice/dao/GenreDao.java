@@ -7,5 +7,5 @@ import java.util.List;
 public interface GenreDao {
     List<Book> getAllBooksByGenre(Genre genre);
 
-    Genre add(Genre genre);
+    void add(Genre genre);
 }

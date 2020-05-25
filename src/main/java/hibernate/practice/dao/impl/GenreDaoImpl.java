@@ -32,14 +32,15 @@ public class GenreDaoImpl implements GenreDao {
     }
 
     @Override
-    public Genre add(Genre genre) {
+    public void add(Genre genre) {
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(genre);
             transaction.commit();
             LOGGER.info("genre " + genre + " was added to DB");
-            return genre;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
