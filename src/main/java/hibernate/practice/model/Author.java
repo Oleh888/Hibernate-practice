@@ -1,11 +1,7 @@
 package hibernate.practice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "author")
@@ -14,8 +10,8 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
-    @ManyToOne
-    private Book book;
+    @OneToMany
+    private List<Book> book;
 
     public Long getId() {
         return id;
@@ -33,11 +29,11 @@ public class Author {
         this.fullName = fullName;
     }
 
-    public Book getBook() {
+    public List<Book> getBook() {
         return book;
     }
 
-    public void setBook(Book book) {
+    public void setBook(List<Book> book) {
         this.book = book;
     }
 

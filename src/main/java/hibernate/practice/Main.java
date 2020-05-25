@@ -7,6 +7,8 @@ import hibernate.practice.model.Genre;
 import hibernate.practice.service.AuthorService;
 import hibernate.practice.service.BookService;
 import hibernate.practice.service.GenreService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -36,15 +38,16 @@ public class Main {
         List<Book> getByGenre = genreService.getAllBooksByGenre(genre);
         Author author = new Author();
         author.setFullName("Ivan Franko");
-        author.setBook(book);
-        author.setBook(book1);
+        author.setBook(new ArrayList<>());
+        author.getBook().add(book);
+        author.getBook().add(book1);
         AuthorService authorService =
                 (AuthorService) INJECTOR.getInstance(AuthorService.class);
         authorService.add(author);
         List<Book> getByAuthor = authorService.getListOfBooksByAuthor(author);
-        // System.out.println("Result of method getBookByTitle Kobzar: " + rezByTitle1);
-        // System.out.println("Result of method getBookByTitle Misto: " + rezByTitle2);
-        // System.out.println("Result of method getAllBooksByGenre novel: " + getByGenre);
-        // System.out.println("Result of method getAllBooksByAuthor: Ivan Franko" + getByAuthor);
+//         System.out.println("Result of method getBookByTitle Kobzar: " + rezByTitle1);
+//         System.out.println("Result of method getBookByTitle Misto: " + rezByTitle2);
+//         System.out.println("Result of method getAllBooksByGenre novel: " + getByGenre);
+//         System.out.println("Result of method getAllBooksByAuthor: Ivan Franko" + getByAuthor);
     }
 }
